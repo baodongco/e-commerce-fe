@@ -1,11 +1,12 @@
-const path = require('path');
-const HWP = require('html-webpack-plugin');
+const path = require('path')
+const HWP = require('html-webpack-plugin')
 
 module.exports = {
   entry: path.resolve(__dirname, './src/index.js'),
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -14,7 +15,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           'babel-loader'
-        ],
+        ]
       },
       {
         test: /\.s[ac]ss$/i,
@@ -27,10 +28,11 @@ module.exports = {
           "sass-loader"
         ]
       }
-    ],
+    ]
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
   },
   plugins: [
     new HWP({
@@ -38,7 +40,8 @@ module.exports = {
     })
   ], 
   devServer: {
+    historyApiFallback: true,
     contentBase: path.resolve(__dirname, './dist'),
-    hot: true,
-  },
-};
+    hot: true
+  }
+}

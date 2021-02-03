@@ -1,21 +1,20 @@
-import React, { Suspense, lazy } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Suspense, lazy } from 'react'
+import ReactDOM from 'react-dom'
 import {
   BrowserRouter as Router,
   Switch,
   Route
-} from "react-router-dom"
-const ProductCategories = lazy(() => import('./pages/product_categories'))
-const ProductDetail = lazy(() => import('./pages/product_detail'))
-import data from './services/mockData.json'
+} from 'react-router-dom'
 import styled from 'styled-components'
-import './style.scss'
- 
-const title = 'Lazada simple application';
+import 'style.scss'
 
 const StyledTitle = styled.h1`
   text-align: center;
 `
+
+const title = 'Lazada simple application'
+const ProductCategories = lazy(() => import('./pages/product_categories'))
+const ProductDetail = lazy(() => import('./pages/product_detail'))
 
 const App = () => (
   <Router>
@@ -25,12 +24,11 @@ const App = () => (
         <Route path="/product/:id">
           <ProductDetail/>
         </Route>
-        <Route path="/">
-          <ProductCategories data={data.data.resultValue[201711102]}/>
+        <Route exact path="/">
+          <ProductCategories/>
         </Route>
       </Switch>
     </Suspense>
   </Router>
 )
-ReactDOM.render(<App/>, document.getElementById('app'));
- 
+ReactDOM.render(<App/>, document.getElementById('app'))

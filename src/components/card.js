@@ -103,9 +103,8 @@ const Card = ({ imgSrc, title, price, originalPrice, currency, discount, rating,
     <StyledCardContainer onClick={() => handleClick(id)}>
       <StyledImageContainer>
         <LazyLoad width={189} height={189}>
-          <img src={imgSrc} alt="product-image"></img>
+          <img src={imgSrc} alt='product-image'></img>
         </LazyLoad>
-        {/* // <img src={imgSrc} alt="product-image"></img> */}
       </StyledImageContainer>
       <StyledMallContainer></StyledMallContainer>
       <StyledCardTitle>
@@ -127,9 +126,9 @@ const Card = ({ imgSrc, title, price, originalPrice, currency, discount, rating,
       <StyledReviewRegion>
         {rating !== 0 ? <StarRatings
           rating={rating}
-          starRatedColor="rgb(250, 202, 81)"
-          starDimension="12px"
-          starSpacing="4px"
+          starRatedColor='rgb(250, 202, 81)'
+          starDimension='12px'
+          starSpacing='4px'
         ></StarRatings> : ''}
         {reviews > 0 ? <StyledReviews>({reviews})</StyledReviews> : ''}
         {region ? <StyledRegion>{region}</StyledRegion> : ''}
@@ -149,7 +148,7 @@ Card.propTypes = {
   reviews: PropTypes.number,
   region: PropTypes.string,
   id: PropTypes.string,
-  handleClick: PropTypes.func,
+  handleClick: PropTypes.func
 }
 
 export default Card

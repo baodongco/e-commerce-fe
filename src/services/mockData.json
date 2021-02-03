@@ -4,8 +4,8 @@
     "resultValue": {
       "201711102": {
         "paging": {
-          "totalItem": 100,
-          "totalPage": 4,
+          "totalItem": 30,
+          "totalPage": 3,
           "pageSize": 30,
           "currentPage": 0
         },

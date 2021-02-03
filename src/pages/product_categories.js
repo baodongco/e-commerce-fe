@@ -1,30 +1,14 @@
-import React from 'react'
-import Card from '../components/card'
-import PropTypes from 'prop-types'
+import React, {useState, useEffect } from 'react'
+import Card from 'components/card'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { getProductList } from 'services/product'
+import Error from 'components/error'
+import ClipLoader from 'react-spinners/ClipLoader'
 
 const StyledProductCategories = styled.div`
   background-color: rgb(245, 245, 245);
-`
-
-const CardsContainer = styled.div`
-  margin: 0 auto;
-  @media only screen and (max-width: 687px) {
-    width: 230px;
-  }
-
-  @media only screen and (min-width: 688px) and (max-width: 991px) {
-    width: 672px;
-  }
-
-  @media only screen and (min-width: 992px) and (max-width: 1311px) {
-    width: 893px;
-  }
-
-  @media only screen and (min-width: 1312px) {
-    width: 1114px;
-  }
 `
 
 const StyledCardContainer = styled.div`
@@ -34,7 +18,7 @@ const StyledCardContainer = styled.div`
 
 const StyledLoadMoreContainer = styled.div`
   padding-top: 20px;
-  padding-bottom: 9px;
+  padding-bottom: 20px;
 `
 
 const StyledLoadMoreButton = styled.button`
@@ -55,12 +39,40 @@ const StyledLoadMoreButton = styled.button`
   }
 `
 
-const ProductCategories = ({ data }) => {
+const ProductCategories = () => {
+  const [data, setData] = useState([])
+  const [page, setPage] = useState(0)
+  const [totalPage, setTotalPage] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    getProductList(page)
+    .then(result => {
+      setData([
+        ...data,
+        ...result.data
+      ])
+      setPage(result.paging.currentPage)
+      setTotalPage(result.paging.totalPage)
+    })
+    .catch(error => {
+      console.error('Error: ', error)
+      setError('There are some errors! Please try again later!')
+    })
+    .finally(() => {
+      setLoading(false)
+    })
+  }, [page])
+
+  const getMoreProducts = () => {
+    setPage(page + 1)
+  }
   const history = useHistory()
   const redirect = (id) => {
     history.push(`/product/${id}`)
   }
-  const cards = data.data.map(item => (
+  const cards = data && data.map(item => (
     <StyledCardContainer key={item.itemId}>
       <Card imgSrc={item.itemImg}
         title={item.itemTitle}
@@ -80,18 +92,20 @@ const ProductCategories = ({ data }) => {
 
   return (
     <StyledProductCategories>
-      <CardsContainer>
-        {cards}
-      </CardsContainer>
-      <StyledLoadMoreContainer>
-        <StyledLoadMoreButton>Load More</StyledLoadMoreButton>
-      </StyledLoadMoreContainer>
+      <div className='content-container'>
+        {error ? <Error></Error> :
+          <>
+          {cards}
+          <StyledLoadMoreContainer>
+            {page !== (totalPage - 1) ? 
+            <>
+              {!loading ? <StyledLoadMoreButton onClick={getMoreProducts}>Load More</StyledLoadMoreButton> : <ClipLoader color='#36D7B7'></ClipLoader>}
+            </> : ''}
+          </StyledLoadMoreContainer>
+          </>}
+      </div>      
     </StyledProductCategories>
   )
 }
 
-ProductCategories.propTypes = {
-  data: PropTypes.object
-}
-
-export default ProductCategories
+export default withRouter(ProductCategories)
