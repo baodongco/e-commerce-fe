@@ -1,0 +1,39 @@
+{
+  "name": "e_commerce_fe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/baodongco/e_commerce_fe.git",
+  "author": "baodongco <blog.vip.uel@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "eslint": "^7.19.0",
+    "eslint-plugin-react": "^7.22.0",
+    "html-webpack-plugin": "^4.5.1",
+    "node-sass": "^5.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-star-ratings": "^2.3.0",
+    "sass": "^1.32.6",
+    "sass-loader": "^10.1.1",
+    "style-loader": "^2.0.0",
+    "styled-components": "^5.2.1",
+    "webpack": "^5.20.0",
+    "webpack-cli": "^4.4.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "start": "webpack serve --mode development --open",
+    "build": "webpack --mode production",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0"
+  }
+}
