@@ -93,7 +93,7 @@ const ProductCategories = () => {
   return (
     <StyledProductCategories>
       <div className='content-container'>
-        {error ? <Error></Error> :
+        {error ? <Error errorMessage={error}></Error> :
           <>
           {cards}
           <StyledLoadMoreContainer>

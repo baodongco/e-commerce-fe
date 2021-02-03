@@ -128,7 +128,7 @@ const ProductDetail = () => {
   return (
     <StyledProductContainer>
       <StyledProductDetailContainer className='content-container'>
-        {!loading ? error ? <Error></Error> :
+        {!loading ? error ? <Error errorMessage={error}></Error> :
         <>
           <StyledImageContainer>
             <LazyLoad width={300} height={300}>
