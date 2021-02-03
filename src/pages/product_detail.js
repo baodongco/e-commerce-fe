@@ -18,6 +18,12 @@ const StyledImageContainer = styled.div`
   }
   margin-right: 20px;
   cursor: pointer;
+  @media only screen and (max-width: 687px) {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin-right: 0;
+  }
 `
 
 const StyledProductContainer = styled.div`
@@ -34,7 +40,10 @@ const StyledProductDetailContainer = styled.div`
 
 const StyledProductInfoWrapper = styled.div`
   display: inline-block;
-  width: calc(100% - 350px);
+  @media only screen and (max-width: 687px) {
+    display: block;
+    margin-left: 16px;
+  }
   box-sizing: border-box;
   vertical-align: top;
 `
@@ -45,7 +54,7 @@ const StyledProductTitle = styled.div`
   color: #212121;
   white-space: pre-wrap;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
