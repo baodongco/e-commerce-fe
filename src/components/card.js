@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import StarRatings from 'react-star-ratings'
+import LazyLoad from 'react-lazyload'
 
 const StyledImageContainer = styled.div`
   width: 189px;
@@ -96,12 +97,15 @@ const StyledReviewRegion = styled.div`
   height 20px;
 `
 
-const Card = ({ imgSrc, title, price, originalPrice, currency, discount, rating, reviews, region }) => {
+const Card = ({ imgSrc, title, price, originalPrice, currency, discount, rating, reviews, region, id, handleClick }) => {
 
   return (
-    <StyledCardContainer>
+    <StyledCardContainer onClick={() => handleClick(id)}>
       <StyledImageContainer>
-        <img src={imgSrc}></img>
+        <LazyLoad width={189} height={189}>
+          <img src={imgSrc} alt="product-image"></img>
+        </LazyLoad>
+        {/* // <img src={imgSrc} alt="product-image"></img> */}
       </StyledImageContainer>
       <StyledMallContainer></StyledMallContainer>
       <StyledCardTitle>
@@ -143,7 +147,9 @@ Card.propTypes = {
   discount: PropTypes.string,
   rating: PropTypes.number,
   reviews: PropTypes.number,
-  region: PropTypes.string
+  region: PropTypes.string,
+  id: PropTypes.string,
+  handleClick: PropTypes.func,
 }
 
 export default Card

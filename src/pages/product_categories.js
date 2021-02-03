@@ -57,15 +57,14 @@ const StyledLoadMoreButton = styled.button`
 
 const ProductCategories = ({ data }) => {
   const history = useHistory()
-  const redirect = (item) => {
-    console.log('etstststs')
-          // e.preventDefault()
-          // e.stopPropagation()
-        history.push(`/product/${item.itemId}`)
+  const redirect = (id) => {
+    history.push(`/product/${id}`)
   }
   const cards = data.data.map(item => (
     <StyledCardContainer key={item.itemId}>
-      <Card imgSrc={item.itemImg} title={item.itemTitle} price={item.itemDiscountPrice}
+      <Card imgSrc={item.itemImg}
+        title={item.itemTitle}
+        price={item.itemDiscountPrice}
         originalPrice={item.itemPrice}
         discount={item.itemDiscount}
         rating={item.itemRatingScore}
@@ -73,7 +72,8 @@ const ProductCategories = ({ data }) => {
         region={item.itemRegion}
         url={item.itemUrl}
         currency={item.currency}
-        onClick={() => history.push(`/product/${item.itemId}`)}
+        id={item.itemId}
+        handleClick={redirect}
         ></Card>
     </StyledCardContainer>
   ))
